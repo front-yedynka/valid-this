@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation forms</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="validate-this.js"></script>
+</head>
+<style>
+    body{
+        color: #1a1a1a;
+    }
+    .container {
+        width: 80%;
+        margin: auto;
+    }
+    .separator {
+        margin: 10px 0;
+        border-bottom: 1px solid #777;
+    }
+    [valid-status="false"]{
+        color: red;
+        border: 1px solid red;
+    }
+    form div {
+        margin: 5px 0;
+    }
+</style>
+<body>
+<div class="container">
+    <h1>Validation for forms</h1>
+    <div class="separator"></div>
+    <h3>FEATURES:</h3>
+    <p>For validation form, add class "validthis-submint" to submit button (input). This button must be inside form.
+    Add class "valid-this" to inputs for validate it.
+        <br> After checking element this element get attribute "valid-status". If elemet is valid - valid-status="true", if novalid -  valid-status="false".
+        <br>If oll elements is valid, form get attribute "valid-form-status='true' ", if summer of elements novalid "valid-form-status='false' .
+        <br> Just us attribute "valid-form-status" for checking form
+    </p>
+    <p><b>Parameters for validation:</b></p>
+    <p><b>"valid-lang" - attribute limits the input of invalid characters</b>
+        <br>can be: "cyr" - only cyrillic symbols;
+        <br> "lat" - only latin;
+        <br>"oll-lang" - oll lang;
+        <br>"numb" - only numbers;
+        <br> "oll" - oll symbols</p>
+     <div class="separator"></div>
+    <p><b>"valid-min-leng" - number for minimal length;</b></p>
+     <div class="separator"></div>
+    <p><b>"valid-max-leng" - number for maximal length;</b></p>
+    <div class="separator"></div>
+    <b>"valid-group" - attribute for group of inputs ore other elements with "one of" selection;</b>
+    <br>"checkboxrow" - for chekboxes groups;
+    <br>"select" - for select form;
+    <div class="separator"></div>
+    <div><b>Styling not valid elements</b></div>
+    <p>For styling not valid elements use selector "[valid-status="false"] "</p>
+    <div class="separator"></div>
+    <h2>My form validations demo:</h2>
+    <form>
+        <h3>Validate tis form</h3>
+        <div class="separator"></div>
+        <div><span>Input only cyrillic</span><input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""></div>
+        <div><span>Input only latin</span><input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3" ></div>
+        <div><span>Input oll lang</span><input class="valid-this" type="text" name="midname" valid-lang="oll-lang" valid-min-leng="3" ></div>
+        <div><span>Input only numbers</span><input class="valid-this" type="text" name="midname" valid-lang="numb" valid-min-leng="3" ></div>
+        <div><span>Input oll lang and numbers</span><input class="valid-this" type="text" name="midname" valid-lang="oll" valid-min-leng="3" ></div>
+        <div><span>email: </span><input class="valid-this" type="email" name="emeil" valid-lang="email" valid-min-leng="6"></div>
+        <div><span>Phone: </span><input class="valid-this" type="tel" name="phone" valid-min-leng="10" valid-status=""></div>
+        <div class="separator"></div>
+        <div class="checkboxrow">
+            <h3>Validate checkboxes - add to input class "valid-this"</h3>
+            <label class="formCheckboks" for="checBox001">
+                <input class="valid-this" type="checkbox" id="checBox001">
+                <span  class="checkbox__label">it is chekbox 1</span>
+            </label>
+            <label class="formCheckboks" for="checBox002">
+                <input class="valid-this" type="checkbox" id="checBox002">
+                <span class="checkbox__label">it is chekbox 1</span>
+            </label>
+            <label class="formCheckboks" for="checBox003">
+                <input class="valid-this" type="checkbox" id="checBox003">
+                <span class="checkbox__label">it is chekbox 1</span>
+            </label>
+        </div>
+        <div class="separator"></div>
+        <div class="valid-this" valid-group="checkboxrow">
+            <h3>Validate checkboxes row (one or more of checkboxes )- add to parent tag class "valid-this" and attribute "valid-group ="checkboxrow""</h3>
+            <label class="formCheckboks" for="checBox001">
+                <input  type="checkbox" id="checBox001">
+                <span  class="checkbox__label">it is chekbox 1</span>
+            </label>
+            <label class="formCheckboks" for="checBox002">
+                <input  type="checkbox" id="checBox002">
+                <span class="checkbox__label">it is chekbox 1</span>
+            </label>
+            <label class="formCheckboks" for="checBox003">
+                <input type="checkbox" id="checBox003">
+                <span class="checkbox__label">it is chekbox 1</span>
+            </label>
+        </div>
+        <div class="separator"></div>
+        <div>
+            <select class="valid-this" valid-group="select">
+                <option value="">select one of</option>
+                <option value="1">option 1</option>
+                <option value="1">option 2</option>
+                <option value="1">option 3</option>
+                <option value="1">option 4</option>
+            </select>
+        </div>
+        <div class="separator"></div>
+        <div>
+            <button type="submit" class="validthis-submint">SUBMIT</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
