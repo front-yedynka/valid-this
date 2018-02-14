@@ -1,6 +1,5 @@
-# valid-this
-
 Validation for forms
+-------------------------------------------------------------
 FEATURES:
 For validation form, add class "validthis-submint" to submit button (input). This button must be inside form. Add class "valid-this" to inputs for validate it. 
 After checking element this element get attribute "valid-status". If elemet is valid - valid-status="true", if novalid - valid-status="false". 
