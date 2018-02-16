@@ -18,7 +18,7 @@
         margin: 10px 0;
         border-bottom: 1px solid #777;
     }
-    [valid-status="false"]{
+    .error, [valid-status="false"]{
         color: red;
         border: 1px solid red;
     }
@@ -54,14 +54,14 @@
     <br>"select" - for select form;
     <div class="separator"></div>
     <div><b>Styling not valid elements</b></div>
-    <p>For styling not valid elements use selector "[valid-status="false"] "</p>
+    <p>For styling not valid elements use selector [valid-status="false"]  or add to teg  &lt;form &gt; attribute [valid-errorclass="error"]</p>
     <div class="separator"></div>
     <h2>My form validations demo:</h2>
-    <form>
+    <form valid-errorclass="error">
         <h3>Validate this form</h3>
         <div class="separator"></div>
-        <div><span>Input only cyrillic</span><input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""></div><span><</span><span>input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""</span><span>></span></div>
-        <div><span>Input only latin</span><input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3" ><span><</span><span>input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3"</span><span>></span></div>
+        <div><span>Input only cyrillic</span><input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""></div>
+        <div><span>Input only latin</span><input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3" ></div>
         <div><span>Input oll lang</span><input class="valid-this" type="text" name="midname" valid-lang="oll-lang" valid-min-leng="3" ></div>
         <div><span>Input only numbers</span><input class="valid-this" type="text" name="midname" valid-lang="numb" valid-min-leng="3" ></div>
         <div><span>Input oll lang and numbers</span><input class="valid-this" type="text" name="midname" valid-lang="oll" valid-min-leng="3" ></div>

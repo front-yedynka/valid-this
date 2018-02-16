@@ -101,6 +101,7 @@ $(document).ready(function () {
     });
 
     $(".validthis-submint").on('click', function (e) {
+        var errorClass = $(this).parents('form').attr('valid-errorclass')
         console.log("validthis-submint cliked")
         e.preventDefault();
        var novalid = 0;
@@ -173,6 +174,11 @@ $(document).ready(function () {
 
             if($(this).attr('valid-status') == 'false'){
                 ++novalid
+                $(this).addClass(errorClass)
+            }
+            else if($(this).attr('valid-status') == 'true'){
+
+                $(this).removeClass(errorClass)
             }
         })
         if(novalid > 0){
