@@ -86,7 +86,19 @@ $(document).ready(function () {
     $('[ valid-lang="email"]').keypress(function(e) {
         return CharRegexMail.test(e.key);
     });
-
+    //---------- ONE OFF CHECKBOXES ROW
+    $('[valid-group="checkboxrow-one-off"] [type="checkbox"]').click(function() {
+        if ($(this).is(':checked')) {
+            $(this).parents('[valid-group="checkboxrow-one-off"]').find('input').each(function () {
+                $(this).prop("disabled", !this.checked);
+            })
+        }
+        else {
+            $(this).parents('[valid-group="checkboxrow-one-off"]').find('input').each(function () {
+                $(this).prop("disabled", false);
+            })
+        }
+    });
 
     $(".validthis-submint").on('click', function (e) {
         console.log("validthis-submint cliked")
@@ -124,6 +136,19 @@ $(document).ready(function () {
             }
             // ----- VALIDATION FOR CHECKBOXES GROUP  -----
             if ($(this).is('[valid-group="checkboxrow"]')){
+                y = 0;
+                $(this).find('[type="checkbox"]').each(function () {
+                    if($(this).is(':checked')){
+                        ++y
+                    }
+                })
+                if(y > 0){
+                    $(this).attr('valid-status','true')
+                }
+                else{ $(this).attr('valid-status','false')}
+            }
+            // ----- VALIDATION FOR CHECKBOXES ONE_OFF GROUP  -----
+            if ($(this).is('[valid-group="checkboxrow-one-off"]')){
                 y = 0;
                 $(this).find('[type="checkbox"]').each(function () {
                     if($(this).is(':checked')){

@@ -60,8 +60,8 @@
     <form>
         <h3>Validate this form</h3>
         <div class="separator"></div>
-        <div><span>Input only cyrillic</span><input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""></div>
-        <div><span>Input only latin</span><input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3" ></div>
+        <div><span>Input only cyrillic</span><input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""></div><span><</span><span>input class="valid-this" type="text" name="firstname" valid-lang="cyr" valid-min-leng="3"  valid-ness=""</span><span>></span></div>
+        <div><span>Input only latin</span><input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3" ><span><</span><span>input class="valid-this" type="text" name="lasttname" valid-lang="lat" valid-min-leng="3"</span><span>></span></div>
         <div><span>Input oll lang</span><input class="valid-this" type="text" name="midname" valid-lang="oll-lang" valid-min-leng="3" ></div>
         <div><span>Input only numbers</span><input class="valid-this" type="text" name="midname" valid-lang="numb" valid-min-leng="3" ></div>
         <div><span>Input oll lang and numbers</span><input class="valid-this" type="text" name="midname" valid-lang="oll" valid-min-leng="3" ></div>
@@ -99,6 +99,18 @@
                 <span class="checkbox__label">it is chekbox 1</span>
             </label>
         </div>
+        <div class="separator"></div>
+<div class="valid-this" valid-group="checkboxrow-one-off">
+    <span>Звернення :</span>
+    <label>
+        <input type="checkbox" name="email_contact" value="email_contact">
+        <span>Пан</span>
+    </label>
+    <label>
+        <input type="checkbox" name="email_contact" value="email_contact">
+        <span>Пані</span>
+    </label>
+</div>
         <div class="separator"></div>
         <div>
             <select class="valid-this" valid-group="select">
