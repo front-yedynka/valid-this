@@ -15,8 +15,8 @@ var CharRegexLatLang = /[a-zA-Z-]/; //--- OL LANG INPUT
 var RegNumb = /^[0-9]+$/;
 var CharRegNumb = /[0-9]+$/;
 
-var RegexMail = /^[0-9-a-zA-Z - _ @ .]+$/; // --- EMAIL INPUTS
-var CharRegexMail = /[0-9-a-zA-Z - _ @ .]/; // --- EMAIL INPUTS
+var RegexMail = /^[0-9-a-zA-Z-_@.]+$/; // --- EMAIL INPUTS
+var CharRegexMail = /[0-9-a-zA-Z-_@.]/; // --- EMAIL INPUTS
 
 $(document).ready(function () {
     // --- REGULARS
@@ -86,18 +86,30 @@ $(document).ready(function () {
     $('[ valid-lang="email"]').keypress(function(e) {
         return CharRegexMail.test(e.key);
     });
-    //---------- ONE OFF CHECKBOXES ROW
-    $('[valid-group="checkboxrow-one-off"] [type="checkbox"]').click(function() {
+
+    //---------- ONE OFF CHECKBOXES ROW ONE CHECKED OTHER DISABLED
+    $('[valid-group="checkboxrow-one-off-dis"] [type="checkbox"]').click(function() {
         if ($(this).is(':checked')) {
-            $(this).parents('[valid-group="checkboxrow-one-off"]').find('input').each(function () {
+            $(this).parents('[valid-group="checkboxrow-one-off-dis"]').find('input').each(function () {
                 $(this).prop("disabled", !this.checked);
             })
         }
         else {
-            $(this).parents('[valid-group="checkboxrow-one-off"]').find('input').each(function () {
+            $(this).parents('[valid-group="checkboxrow-one-off-dis"]').find('input').each(function () {
                 $(this).prop("disabled", false);
             })
         }
+    });
+
+    //---------- ONE OFF CHECKBOXES ROW ONE CHECKED OTHER UNCHECKED
+    $('[valid-group="checkboxrow-one-off"] [type="checkbox"]').click(function() {
+
+        $(this).parents('[valid-group="checkboxrow-one-off"]').find('input').each(function () {
+            if ($(this).is(':checked')) {
+                $(this).prop("checked", !this.checked);
+            }
+        })
+        $(this).prop("checked", true);
     });
 
     $(".validthis-submint").on('click', function (e) {
@@ -107,6 +119,7 @@ $(document).ready(function () {
        var novalid = 0;
         $(this).parents('form').find('.valid-this').each(function () {
             console.log("validthis each funk is init")
+            // --- VALID MIN LENGTH
             if ($(this).is('[valid-min-leng]')){
                 x = Number($(this).attr('valid-min-leng'))
                 //console.log("min length: "+x)
@@ -117,6 +130,7 @@ $(document).ready(function () {
                     $(this).attr('valid-status','true')
                 }
             }
+            // --- VALID MAX LENGTH
             if ($(this).is('[valid-max-leng]')){
                 x = Number($(this).attr('valid-min-leng'))
                 //console.log("min length: "+x)
@@ -127,6 +141,7 @@ $(document).ready(function () {
                     $(this).attr('valid-status','true')
                 }
             }
+            // --- VALID CHECKBOX
             if ($(this).is('[type="checkbox"]')){
                 if ($(this).is(':checked')){
                     $(this).attr('valid-status','true').parents('label').attr('valid-status','true')
@@ -135,6 +150,11 @@ $(document).ready(function () {
                     $(this).attr('valid-status','false').parents('label').attr('valid-status','false')
                 }
             }
+            // --- VALID FOR EMAIL
+            if(($(this).is('[valid-lang="email"]'))&&($(this).val().indexOf('@')>-1)&&($(this).val().indexOf('.')>-1)&&($(this).val().indexOf('.') < $(this).val().length - 2)){
+                $(this).attr('valid-status','true')
+            }
+            else{ $(this).attr('valid-status','false')}
             // ----- VALIDATION FOR CHECKBOXES GROUP  -----
             if ($(this).is('[valid-group="checkboxrow"]')){
                 y = 0;
@@ -161,6 +181,7 @@ $(document).ready(function () {
                 }
                 else{ $(this).attr('valid-status','false')}
             }
+
             // ----- VALIDATION FOR SELECT  -----
             if ($(this).is('[valid-group="select"]')){
                 y = 0;
@@ -169,9 +190,48 @@ $(document).ready(function () {
                 }
                 else{ $(this).attr('valid-status','false')}
             }
-        })
-        $(this).parents('form').find('.valid-this').each(function () {
 
+        //    -----
+            if($(this).is('[valid-group="inputtext-one-off"]')){
+                console.log("valid-group=inputtext-one-off IS")
+                s = 0;
+                $(this).find('input').each(function () {
+                    if ($(this).is('[valid-min-leng]')){
+                        x = Number($(this).attr('valid-min-leng'))
+                        //console.log("min length: "+x)
+                        if ($(this).val().length > x){
+                            $(this).attr('valid-status','true')
+                        }
+                        else{
+                            $(this).attr('valid-status','truefalse')
+                        }
+                    }
+                    if ($(this).is('[valid-max-leng]')){
+                        x = Number($(this).attr('valid-min-leng'))
+                        //console.log("min length: "+x)
+                        if ($(this).val().length < x){
+                            $(this).attr('valid-status','true')
+                        }
+                        else{
+                            $(this).attr('valid-status','truefalse')
+                        }
+                    }
+                })
+                $(this).find('input').each(function () {
+                    if($(this).attr('valid-status') == 'true'){
+                        ++s
+                    }
+                })
+                if (s > 0){
+                    $(this).attr('valid-status','true')
+                }
+                else{
+                    $(this).attr('valid-status','false')
+                }
+            }
+        })
+
+        $(this).parents('form').find('.valid-this').each(function () {
             if($(this).attr('valid-status') == 'false'){
                 ++novalid
                 $(this).addClass(errorClass)
@@ -181,6 +241,7 @@ $(document).ready(function () {
                 $(this).removeClass(errorClass)
             }
         })
+
         if(novalid > 0){
             $(this).parents('form').attr('valid-form-status','false')
             console.log("form is not valid")
@@ -216,4 +277,5 @@ $(document).ready(function () {
         }
     });
 })
+
 
